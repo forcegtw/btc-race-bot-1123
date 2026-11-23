@@ -7,6 +7,7 @@ const ORDERS: Ord[] = [{"seq":7,"side":"buy","notional_raw":340709984,"j":41},{"
 // quantity. Both are capped to current cash/position so a model divergence triggers the cap
 // rather than a protocol error.
 let idx = 0;
+// Schedule is replayed as exact u64 amounts; a cap firing means the model diverged.
 await runBars({
   onBatch(state, batch) {
     const sym = state.hello.symbols[0].symbol;
